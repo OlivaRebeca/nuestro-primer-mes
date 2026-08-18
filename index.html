@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Un pedacito de nuestro inicio 🌿</title>
+
+
+    <style>
+
+        /* =====================================================
+           🌿 PALETA
+        ===================================================== */
+
+        :root {
+
+            --papel: #f5f1e7;
+
+            --papel-oscuro: #e8e0d0;
+
+            --verde-claro: #dce5d5;
+
+            --verde: #a7b99b;
+
+            --verde-oscuro: #61705a;
+
+            --verde-profundo: #344333;
+
+            --rosa: #d8b8b1;
+
+            --blanco: #fffdf8;
+
+            --sombra: rgba(49, 63, 48, 0.18);
+
+        }
+
+
+        * {
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            font-family:
+                Georgia,
+                'Times New Roman',
+                serif;
+
+            background: var(--papel);
+
+            color: var(--verde-profundo);
+
+            overflow-x: hidden;
+
+        }
+
+
+        /* =====================================================
+           🌿 FONDO
+        ===================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background-image:
+
+                radial-gradient(
+                    rgba(97,112,90,0.08) 1px,
+                    transparent 1px
+                );
+
+            background-size: 25px 25px;
+
+            pointer-events: none;
+
+            z-index: -1;
+
+        }
+
+
+        /* =====================================================
+           🎵 BOTÓN DE MÚSICA
+        ===================================================== */
+
+        .music-button {
+
+            position: fixed;
+
+            top: 20px;
+
+            right: 20px;
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(52,67,51,0.2);
+
+            background:
+                rgba(255,253,248,0.92);
+
+            color:
+                var(--verde-profundo);
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            z-index: 2000;
+
+            box-shadow:
+                0 5px 15px var(--sombra);
+
+            transition: 0.3s;
+
+        }
+
+
+        .music-button:hover {
+
+            transform: scale(1.1);
+
+        }
+
+
+        /* =====================================================
+           🎵 AVISO INICIAL DE MÚSICA
+        ===================================================== */
+
+        .music-intro {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(52,67,51,0.62);
+
+            backdrop-filter: blur(7px);
+
+            -webkit-backdrop-filter: blur(7px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+            z-index: 1900;
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transition:
+                opacity 0.7s ease,
+                visibility 0.7s ease;
+
+        }
+
+
+        .music-intro.ocultar {
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+        }
+
+
+        /* =====================================================
+           💌 TARJETA DEL AVISO
+        ===================================================== */
+
+        .music-card {
+
+            width:
+                min(420px, 100%);
+
+            padding:
+                50px 35px;
+
+            background:
+                var(--papel);
+
+            text-align: center;
+
+            position: relative;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.30);
+
+            animation:
+                aparecerMusica
+                0.9s ease;
+
+        }
+
+
+        .music-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 14px;
+
+            border:
+                1px solid
+                rgba(97,112,90,0.25);
+
+            pointer-events: none;
+
+        }
+
+
+        .music-card-decoracion {
+
+            font-size: 25px;
+
+            margin-bottom: 5px;
+
+            opacity: 0.8;
+
+        }
+
+
+        .music-note {
+
+            font-size: 42px;
+
+            margin-bottom: 18px;
+
+            animation:
+                notaMusical
+                1.5s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .music-card h2 {
+
+            font-size: 30px;
+
+            font-weight: normal;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .music-card p {
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            color: #667060;
+
+            max-width: 320px;
+
+            margin: auto;
+
+        }
+
+
+        .flecha-musica {
+
+            margin-top: 25px;
+
+            font-size: 28px;
+
+            color:
+                var(--verde-oscuro);
+
+            animation:
+                flechaMusica
+                1.2s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .music-card small {
+
+            display: block;
+
+            margin-top: 5px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+
+            color:
+                var(--verde-oscuro);
+
+        }
+
+
+        .music-card-heart {
+
+            margin-top: 25px;
+
+            font-size: 25px;
+
+            color:
+                var(--verde-oscuro);
+
+        }
+
+
+        /* =====================================================
+           🎵 ANIMACIÓN DEL BOTÓN
+        ===================================================== */
+
+        .music-pendiente {
+
+            animation:
+                llamarMusica
+                1.8s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .music-button.reproduciendo {
+
+            animation: none;
+
+            background:
+                var(--verde-claro);
+
+        }
+
+
+        /* =====================================================
+           🌿 PORTADA
+        ===================================================== */
+
+        .portada {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px;
+
+            position: relative;
+
+        }
+
+
+        .portada-contenido {
+
+            width:
+                min(700px, 100%);
+
+            text-align: center;
+
+            padding: 70px 30px;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.45),
+                    rgba(255,255,255,0.45)
+                );
+
+            border:
+                1px solid
+                rgba(52,67,51,0.12);
+
+            box-shadow:
+                0 20px 50px
+                var(--sombra);
+
+            position: relative;
+
+        }
+
+
+        .portada-contenido::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 12px;
+
+            border:
+                1px solid
+                rgba(97,112,90,0.25);
+
+            pointer-events: none;
+
+        }
+
+
+        .pequeno-texto {
+
+            font-family: Arial, sans-serif;
+
+            text-transform: uppercase;
+
+            letter-spacing: 5px;
+
+            font-size: 12px;
+
+            color:
+                var(--verde-oscuro);
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .portada h1 {
+
+            font-size:
+                clamp(42px,8vw,80px);
+
+            font-weight: normal;
+
+            line-height: 1;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .portada h1 span {
+
+            color:
+                var(--verde-oscuro);
+
+            font-style: italic;
+
+        }
+
+
+        .nombres {
+
+            font-size: 25px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .fecha {
+
+            font-family: Arial, sans-serif;
+
+            color:
+                var(--verde-oscuro);
+
+            letter-spacing: 2px;
+
+            font-size: 13px;
+
+        }
+
+
+        .hojita {
+
+            font-size: 35px;
+
+            margin: 30px 0;
+
+            animation:
+                flotar
+                3s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .abrir {
+
+            display: inline-block;
+
+            margin-top: 35px;
+
+            padding: 14px 30px;
+
+            background:
+                var(--verde-oscuro);
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 30px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .abrir:hover {
+
+            background:
+                var(--verde-profundo);
+
+            transform:
+                translateY(-3px);
+
+        }
+
+
+        /* =====================================================
+           📖 SECCIONES
+        ===================================================== */
+
+        section {
+
+            width:
+                min(1100px,92%);
+
+            margin: auto;
+
+            padding: 100px 0;
+
+        }
+
+
+        .titulo-seccion {
+
+            text-align: center;
+
+            margin-bottom: 60px;
+
+        }
+
+
+        .titulo-seccion small {
+
+            font-family: Arial, sans-serif;
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            color:
+                var(--verde-oscuro);
+
+            font-size: 11px;
+
+        }
+
+
+        .titulo-seccion h2 {
+
+            font-size:
+                clamp(35px,6vw,55px);
+
+            font-weight: normal;
+
+            margin-top: 10px;
+
+        }
+
+
+        .titulo-seccion p {
+
+            margin-top: 15px;
+
+            color: #667060;
+
+            font-style: italic;
+
+        }
+
+
+        /* =====================================================
+           💌 HISTORIA
+        ===================================================== */
+
+        .historia {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 60px;
+
+            align-items: center;
+
+        }
+
+
+        .foto-principal {
+
+            background:
+                var(--blanco);
+
+            padding:
+                15px 15px 50px;
+
+            box-shadow:
+                0 15px 30px
+                var(--sombra);
+
+            transform:
+                rotate(-2deg);
+
+            position: relative;
+
+        }
+
+
+        .foto-principal::after {
+
+            content:
+                "24/07/2026";
+
+            position: absolute;
+
+            bottom: 15px;
+
+            left: 0;
+
+            right: 0;
+
+            text-align: center;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            color: #777;
+
+        }
+
+
+        .foto-principal img {
+
+            width: 100%;
+
+            height: 420px;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        .historia-texto {
+
+            font-size: 18px;
+
+            line-height: 1.9;
+
+        }
+
+
+        .historia-texto .decoracion {
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .historia-texto p {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =====================================================
+           📸 GALERÍA
+        ===================================================== */
+
+        .galeria {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 35px;
+
+            align-items: start;
+
+        }
+
+
+        .polaroid {
+
+            background:
+                var(--blanco);
+
+            padding:
+                12px 12px 45px;
+
+            box-shadow:
+                0 12px 25px
+                var(--sombra);
+
+            position: relative;
+
+            transition: 0.4s;
+
+            cursor: pointer;
+
+        }
+
+
+        .polaroid:nth-child(1) {
+            transform: rotate(-3deg);
+        }
+
+
+        .polaroid:nth-child(2) {
+            transform: rotate(2deg);
+        }
+
+
+        .polaroid:nth-child(3) {
+            transform: rotate(-1deg);
+        }
+
+
+        .polaroid:nth-child(4) {
+            transform: rotate(3deg);
+        }
+
+
+        .polaroid:nth-child(5) {
+            transform: rotate(-2deg);
+        }
+
+
+        .polaroid:nth-child(6) {
+            transform: rotate(2deg);
+        }
+
+
+        .polaroid:hover {
+
+            transform:
+                rotate(0deg)
+                scale(1.05);
+
+            z-index: 5;
+
+        }
+
+
+        .polaroid img {
+
+            width: 100%;
+
+            height: 250px;
+
+            object-fit: cover;
+
+            display: block;
+
+            background:
+                var(--papel-oscuro);
+
+        }
+
+
+        .polaroid p {
+
+            position: absolute;
+
+            bottom: 13px;
+
+            left: 10px;
+
+            right: 10px;
+
+            text-align: center;
+
+            font-style: italic;
+
+            font-size: 14px;
+
+            color: #596051;
+
+        }
+
+
+        /* =====================================================
+           💬 MENSAJES
+        ===================================================== */
+
+        .mensajes {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap: 35px;
+
+            margin-top: 40px;
+
+        }
+
+
+        .nota {
+
+            background:
+                #fffdf7;
+
+            padding: 30px;
+
+            box-shadow:
+                0 10px 25px
+                var(--sombra);
+
+            position: relative;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .nota:nth-child(even) {
+
+            background:
+                #edf2e8;
+
+            transform:
+                rotate(1deg);
+
+        }
+
+
+        .nota:nth-child(odd) {
+
+            transform:
+                rotate(-1deg);
+
+        }
+
+
+        .nota::before {
+
+            content: "";
+
+            width: 65px;
+
+            height: 18px;
+
+            background:
+                rgba(216,184,177,0.65);
+
+            position: absolute;
+
+            top: -8px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%)
+                rotate(-2deg);
+
+        }
+
+
+        .nota small {
+
+            display: block;
+
+            margin-top: 15px;
+
+            color:
+                var(--verde-oscuro);
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =====================================================
+           🌱 RAZONES
+        ===================================================== */
+
+        .razones {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 25px;
+
+        }
+
+
+        .razon {
+
+            padding: 35px 25px;
+
+            background:
+                rgba(255,255,255,0.55);
+
+            border:
+                1px solid
+                rgba(52,67,51,0.1);
+
+            text-align: center;
+
+            transition: 0.3s;
+
+        }
+
+
+        .razon:hover {
+
+            transform:
+                translateY(-8px);
+
+            box-shadow:
+                0 15px 30px
+                var(--sombra);
+
+        }
+
+
+        .razon .icono {
+
+            font-size: 30px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .razon h3 {
+
+            font-weight: normal;
+
+            font-size: 21px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .razon p {
+
+            color: #667060;
+
+            line-height: 1.6;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =====================================================
+           💌 CARTA
+        ===================================================== */
+
+        .carta-contenedor {
+
+            max-width: 750px;
+
+            margin: auto;
+
+            background:
+                #fffdf7;
+
+            padding: 60px;
+
+            box-shadow:
+                0 20px 45px
+                var(--sombra);
+
+            position: relative;
+
+            line-height: 2;
+
+            font-size: 18px;
+
+        }
+
+
+        .carta-contenedor::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 18px;
+
+            border:
+                1px solid
+                rgba(97,112,90,0.2);
+
+            pointer-events: none;
+
+        }
+
+
+        .carta-contenedor p {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .firma {
+
+            text-align: right;
+
+            font-style: italic;
+
+            margin-top: 35px;
+
+        }
+
+
+        /* =====================================================
+           ❤️ FINAL
+        ===================================================== */
+
+        .final {
+
+            min-height: 80vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+        }
+
+
+        .final h2 {
+
+            font-size:
+                clamp(45px,8vw,85px);
+
+            font-weight: normal;
+
+            line-height: 1.1;
+
+        }
+
+
+        .final h2 span {
+
+            color:
+                var(--verde-oscuro);
+
+            font-style: italic;
+
+        }
+
+
+        .final p {
+
+            margin-top: 25px;
+
+            font-size: 18px;
+
+            color: #667060;
+
+        }
+
+
+        .corazon-final {
+
+            font-size: 45px;
+
+            margin-top: 30px;
+
+            animation:
+                latido
+                1.5s
+                infinite;
+
+        }
+
+
+        /* =====================================================
+           ✨ ANIMACIONES
+        ===================================================== */
+
+        @keyframes flotar {
+
+            0%,100% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-10px);
+
+            }
+
+        }
+
+
+        @keyframes latido {
+
+            0%,100% {
+
+                transform:
+                    scale(1);
+
+            }
+
+            50% {
+
+                transform:
+                    scale(1.15);
+
+            }
+
+        }
+
+
+        @keyframes llamarMusica {
+
+            0%,100% {
+
+                transform:
+                    scale(1);
+
+                box-shadow:
+                    0 5px 15px
+                    var(--sombra);
+
+            }
+
+            50% {
+
+                transform:
+                    scale(1.12);
+
+                box-shadow:
+                    0 0 0 10px
+                    rgba(167,185,155,0.20),
+                    0 8px 20px
+                    var(--sombra);
+
+            }
+
+        }
+
+
+        @keyframes notaMusical {
+
+            0%,100% {
+
+                transform:
+                    rotate(-5deg)
+                    translateY(0);
+
+            }
+
+            50% {
+
+                transform:
+                    rotate(5deg)
+                    translateY(-6px);
+
+            }
+
+        }
+
+
+        @keyframes flechaMusica {
+
+            0%,100% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-8px);
+
+            }
+
+        }
+
+
+        @keyframes aparecerMusica {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px)
+                    scale(0.95);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        .aparecer {
+
+            opacity: 0;
+
+            transform:
+                translateY(30px);
+
+            transition:
+                1s ease;
+
+        }
+
+
+        .aparecer.visible {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* =====================================================
+           📱 RESPONSIVE
+        ===================================================== */
+
+        @media (max-width:800px) {
+
+            section {
+
+                padding: 70px 0;
+
+            }
+
+
+            .historia {
+
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+
+            }
+
+
+            .foto-principal img {
+
+                height: 350px;
+
+            }
+
+
+            .galeria {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+                gap: 20px;
+
+            }
+
+
+            .mensajes {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .razones {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .carta-contenedor {
+
+                padding:
+                    40px 25px;
+
+            }
+
+        }
+
+
+        @media (max-width:550px) {
+
+            .galeria {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .razones {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .portada-contenido {
+
+                padding:
+                    60px 20px;
+
+            }
+
+
+            .portada h1 {
+
+                font-size: 45px;
+
+            }
+
+
+            .music-card {
+
+                padding:
+                    45px 25px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================================
+     🎵 BOTÓN DE MÚSICA
+=========================================================== -->
+
+<button
+    class="music-button music-pendiente"
+    onclick="toggleMusic()"
+    id="musicButton"
+    aria-label="Reproducir nuestra canción">
+
+    🎵
+
+</button>
+
+
+
+<!-- ==========================================================
+     💌 AVISO PARA DANI
+=========================================================== -->
+
+<div
+    class="music-intro"
+    id="musicIntro">
+
+    <div class="music-card">
+
+        <div class="music-card-decoracion">
+            🌿
+        </div>
+
+
+        <h2>
+            Antes de comenzar...
+        </h2>
+
+        <p>
+
+            Hay una canción que quiero que
+            escuches mientras recorres
+            este pequeño pedacito de nosotros.
+
+        </p>
+
+        <div class="flecha-musica">
+            ↑
+        </div>
+
+        <small>
+
+            Toca el ícono 🎵 de arriba a la derecha
+            para comenzar
+
+        </small>
+
+        <div class="music-card-heart">
+            ♡
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+     🎵 MÚSICA
+=========================================================== -->
+
+<audio
+    id="musica"
+    loop>
+
+    <source
+        src="musica/nuestra-cancion.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+
+<!-- ==========================================================
+     🌿 PORTADA
+=========================================================== -->
+
+<header class="portada">
+
+    <div class="portada-contenido">
+
+        <div class="pequeno-texto">
+
+            24·07·2026
+            &nbsp;—&nbsp;
+            24·08·2026
+
+        </div>
+
+
+        <div class="hojita">
+            🌿
+        </div>
+
+
+        <h1>
+
+            Un pedacito<br>
+
+            de
+            <span>
+                nuestro inicio
+            </span>
+
+        </h1>
+
+
+        <div class="nombres">
+
+            Rebe ♡ Dani
+
+        </div>
+
+
+        <div class="fecha">
+
+            Nuestro primer mes
+
+        </div>
+
+
+        <a
+            href="#historia"
+            class="abrir">
+
+            Abrir nuestro álbum
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==========================================================
+     💌 CÓMO NOS CONOCIMOS
+=========================================================== -->
+
+<section id="historia">
+
+    <div class="titulo-seccion aparecer">
+
+        <small>
+            Capítulo 01
+        </small>
+
+        <h2>
+            Cómo empezó todo
+        </h2>
+
+        <p>
+            Porque toda historia bonita
+            tiene un segundo inicio.
+        </p>
+
+    </div>
+
+
+    <div class="historia">
+
+
+        <div class="foto-principal aparecer">
+
+            <img
+                src="fotos/historia.jpg"
+                alt="Nuestro comienzo">
+
+        </div>
+
+
+        <div class="historia-texto aparecer">
+
+            <div class="decoracion">
+                🌿
+            </div>
+
+
+            <p>
+
+                Todo comenzó con una solicitud
+                en Instagram. Después nos borramos
+                —yo lo hice pipi—, volvimos a
+                seguirnos y empezamos a hablar
+                por Instagram, hasta pasar a
+                WhatsApp.
+
+            </p>
+
+
+            <p>
+
+                Con el tiempo dejamos de hablar,
+                pero cada vez me gustabas más
+                y ya no podía esconder las ganas
+                de conocerte.
+
+            </p>
+
+
+            <p>
+
+                Sin saber muy bien cómo acercarme
+                de nuevo, un día te propuse ir a
+                ver la película de los Minions.
+
+                Fue mi forma de buscar una excusa
+                para volver a estar cerca de ti,
+                porque en el fondo solo sabía
+                que quería conocerte más.
+
+            </p>
+
+
+            <p>
+
+                Y así comenzaron las risas,
+                los audios interminables que amo
+                y nuestros días acompañándonos
+                por llamadas.
+
+                ❤️
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================================
+     📸 RECUERDOS
+=========================================================== -->
+
+<section>
+
+    <div class="titulo-seccion aparecer">
+
+        <small>
+            Capítulo 02
+        </small>
+
+        <h2>
+            Pequeños momentos
+        </h2>
+
+        <p>
+            Algunos de los recuerdos
+            que quiero guardar para siempre.
+        </p>
+
+    </div>
+
+
+    <div class="galeria">
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto01.jpg"
+                alt="Recuerdo 1">
+
+            <p>
+                24-07-2026 🤍
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto02.jpg"
+                alt="Recuerdo 2">
+
+            <p>
+                nuestro día
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto03.jpg"
+                alt="Recuerdo 3">
+
+            <p>
+                nuestra primer foto
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto04.jpg"
+                alt="Recuerdo 4">
+
+            <p>
+                gymtime
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto05.jpg"
+                alt="Recuerdo 5">
+
+            <p>
+                first date at the theater
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto06.jpg"
+                alt="Recuerdo 6">
+
+            <p>
+                second date at the theater
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto07.jpg"
+                alt="Recuerdo 7">
+
+            <p>
+                Acatenango
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto08.jpg"
+                alt="Recuerdo 8">
+
+            <p>
+                entierrados, pero felices
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto09.jpg"
+                alt="Recuerdo 9">
+
+            <p>
+                de mis favoritas
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto10.jpg"
+                alt="Recuerdo 10">
+
+            <p>
+                por usted me voy hasta Petén
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto11.jpg"
+                alt="Recuerdo 11">
+
+            <p>
+                comiditas 💚
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto12.jpg"
+                alt="Recuerdo 12">
+
+            <p>
+                asustadísima, pero feliz
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto13.jpg"
+                alt="Recuerdo 13">
+
+            <p>
+                🤍
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto14.jpg"
+                alt="Recuerdo 14">
+
+            <p>
+                💚
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto15.jpg"
+                alt="Recuerdo 15">
+
+            <p>
+                primera feria
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto16.jpg"
+                alt="Recuerdo 16">
+
+            <p>
+                primera feria
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto17.jpg"
+                alt="Recuerdo 17">
+
+            <p>
+                siempre tú 💚
+            </p>
+
+        </div>
+
+
+        <div class="polaroid aparecer">
+
+            <img
+                src="fotos/foto18.jpg"
+                alt="Recuerdo 18">
+
+            <p>
+                super chiveada jajaja
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================================
+     💬 MENSAJES
+=========================================================== -->
+
+<section>
+
+    <div class="titulo-seccion aparecer">
+
+        <small>
+            Capítulo 03
+        </small>
+
+        <h2>
+            Cosas que me has dicho
+        </h2>
+
+        <p>
+            Palabras tuyas que quiero conservar.
+        </p>
+
+    </div>
+
+
+    <div class="mensajes">
+
+
+        <div class="nota aparecer">
+
+            “Si mando a mi deste al colegio
+            le hacen bullying por lo gordo que
+            se pone con esas fotos ❤️”
+
+            <small>
+                — Dani 🤍
+            </small>
+
+        </div>
+
+
+        <div class="nota aparecer">
+
+            “Cuando termine voy a escribir
+            tu nombre con mi semen.”
+
+            <small>
+                — Dani 🌿
+            </small>
+
+        </div>
+
+
+        <div class="nota aparecer">
+
+            “Ya voy de camino con el deste
+            al aire apuntando puro GPS
+            para su casa.”
+
+            <small>
+                — Dani 💌
+            </small>
+
+        </div>
+
+
+        <div class="nota aparecer">
+
+            “Squirteame así llego con tu olor.”
+
+            <small>
+                — Dani 🤍
+            </small>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================================
+     🌱 COSAS QUE AMO DE TI
+=========================================================== -->
+
+<section>
+
+    <div class="titulo-seccion aparecer">
+
+        <small>
+            Capítulo 04
+        </small>
+
+        <h2>
+            Cosas que amo de ti
+        </h2>
+
+        <p>
+            Podría escribir muchas más...
+        </p>
+
+    </div>
+
+
+    <div class="razones">
+
+
+        <div class="razon aparecer">
+
+            <div class="icono">
+                🌿
+            </div>
+
+            <h3>
+                Tu forma de ser
+            </h3>
+
+            <p>
+
+                Amo lo chistoso que eres,
+                esa facilidad que tienes para
+                hacerme reír y cómo siempre
+                terminamos riéndonos de las
+                mismas cosas.
+
+                Amo tu inteligencia,
+                tu carisma y, sobre todo,
+                la bondad que llevas dentro.
+
+            </p>
+
+        </div>
+
+
+        <div class="razon aparecer">
+
+            <div class="icono">
+                🤍
+            </div>
+
+            <h3>
+                Cómo me haces sentir
+            </h3>
+
+            <p>
+
+                Contigo me siento entendida,
+                cuidada y amada.
+
+                Me encanta poder ser yo misma
+                contigo y saber que entiendes
+                hasta esas pequeñas partes raras
+                de mí que no siempre sé explicar.
+
+                A tu lado siento una tranquilidad
+                muy bonita.
+
+                Me das paz.
+
+            </p>
+
+        </div>
+
+
+        <div class="razon aparecer">
+
+            <div class="icono">
+                ✨
+            </div>
+
+            <h3>
+                Lo que admiro de ti
+            </h3>
+
+            <p>
+
+                Admiro muchísimo la visión
+                que tienes de tu vida,
+                de lo que quieres construir
+                y del hombre que eres.
+
+                Admiro tu deseo de formar
+                una familia, pero sobre todo
+                admiro que Dios tenga un lugar
+                tan importante en tu corazón.
+
+            </p>
+
+        </div>
+
+
+        <div class="razon aparecer">
+
+            <div class="icono">
+                🫶
+            </div>
+
+            <h3>
+                Tu manera de querer
+            </h3>
+
+            <p>
+
+                Amo la delicadeza con la que
+                me hablas y me tratas.
+
+                Amo cómo me besas con tanto amor,
+                cómo me abrazas y la manera
+                tan bonita en que me haces
+                sentir querida.
+
+                Y amo cuando buscamos
+                nuestras manitas al acostarnos.
+
+            </p>
+
+        </div>
+
+
+        <div class="razon aparecer">
+
+            <div class="icono">
+                ☀️
+            </div>
+
+            <h3>
+                Las pequeñas cosas
+            </h3>
+
+            <p>
+
+                Nuestras manos encontrándose,
+                reírnos de una tontería que solo
+                nosotros entendemos, tus abrazos,
+                tus besos y simplemente estar
+                acostados juntos sin necesitar
+                nada más.
+
+                Son esas pequeñas cosas las que
+                hacen que estar contigo se sienta
+                tan bonito.
+
+            </p>
+
+        </div>
+
+
+        <div class="razon aparecer">
+
+            <div class="icono">
+                💚
+            </div>
+
+            <h3>
+                Nosotros
+            </h3>
+
+            <p>
+
+                Amo lo que estamos construyendo.
+
+                Me emociona pensar que apenas
+                llevamos un mes y ya existen
+                tantos recuerdos que quiero
+                guardar.
+
+                Quiero seguir descubriéndote,
+                acompañarte y construir poquito
+                a poquito algo que tenga amor,
+                respeto, complicidad y a Dios
+                en el centro.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================================
+     💌 CARTA FINAL
+=========================================================== -->
+
+<section>
+
+    <div class="titulo-seccion aparecer">
+
+        <small>
+            Último capítulo
+        </small>
+
+        <h2>
+            Para ti
+        </h2>
+
+    </div>
+
+
+    <div class="carta-contenedor aparecer">
+
+
+        <p>
+            Mi amor,
+        </p>
+
+
+        <p>
+
+            Hoy cumplimos nuestro primer mes y,
+            aunque pueda parecer poquito tiempo,
+            para mí significa muchísimo.
+
+            Me hace feliz pensar que este es apenas
+            un pedacito de nuestro inicio, porque
+            todavía nos queda tanto por vivir
+            y descubrir juntos.
+
+        </p>
+
+
+        <p>
+
+            Quiero agradecerte especialmente por
+            algo que nunca voy a olvidar:
+
+            no cualquiera acompaña a alguien durante
+            un proceso de salud, y mucho menos
+            acompaña también los miedos y las
+            preocupaciones que vienen con él.
+
+            Tú pudiste dejar que el miedo decidiera
+            por nosotros, pero tu corazón fue mucho
+            más grande.
+
+            Elegiste poner nuestro amor por encima
+            de esos temores y seguir conociéndonos,
+            seguir construyendo esto y seguir viendo
+            quiénes somos juntos.
+
+        </p>
+
+
+        <p>
+
+            Gracias por no haberme dejado aquel día
+            en el momento en el que nuestra historia
+            apenas comenzaba.
+
+            Gracias por quedarte, por entenderme
+            y por quererme tal como soy,
+            incluso en una etapa en la que quizá
+            no todo es sencillo.
+
+            Gracias por tu paciencia
+            y tanto amor.
+
+        </p>
+
+
+        <p>
+
+            Te admiro por el hombre que eres,
+            por tu inteligencia, tu bondad,
+            tu forma de querer, tu visión de vida
+            y por ese corazón en el que Dios tiene
+            un lugar tan bonito.
+
+            Me encanta poder reírme contigo por
+            las mismas tonterías, sentirme entendida
+            y encontrar tanta ternura en cosas tan
+            pequeñas como cuando buscamos nuestras
+            manos al acostarnos.
+
+        </p>
+
+
+        <p>
+
+            Quiero seguir descubriéndote,
+            acompañándote, admirándote
+            y creciendo contigo.
+
+            Quiero guardar cada pequeño momento
+            de nosotros, porque sé que algún día
+            miraremos hacia atrás y veremos cuánto
+            empezó a crecer desde este primer mes.
+
+        </p>
+
+
+        <p>
+
+            Gracias por elegirme,
+            por quedarte y por dejarme
+            elegirte también.
+
+        </p>
+
+
+        <p>
+
+            Feliz primer mes, mi amor.
+
+            Esto apenas comienza. 🌿🤍
+
+        </p>
+
+
+        <div class="firma">
+
+            Con amor,<br>
+
+            Rebe 🤍
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================================
+     🌿 FINAL
+=========================================================== -->
+
+<section class="final">
+
+    <div>
+
+        <div class="pequeno-texto">
+
+            24 · 08 · 2026
+
+        </div>
+
+
+        <h2>
+
+            Rebe
+
+            <span>
+                ♡
+            </span>
+
+            Dani
+
+        </h2>
+
+
+        <p>
+
+            Nuestro primer mes.
+            <br>
+
+            Y apenas estamos comenzando.
+
+        </p>
+
+
+        <div class="corazon-final">
+
+            💚
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+
+/* ==========================================================
+   🎵 MÚSICA
+=========================================================== */
+
+const musica =
+    document.getElementById("musica");
+
+
+const musicButton =
+    document.getElementById("musicButton");
+
+
+const musicIntro =
+    document.getElementById("musicIntro");
+
+
+let reproduciendo = false;
+
+
+
+function toggleMusic() {
+
+
+    if (!reproduciendo) {
+
+
+        musica.play()
+
+            .then(() => {
+
+
+                musicButton.innerHTML =
+                    "⏸️";
+
+
+                reproduciendo = true;
+
+
+                /* Quitar animación */
+
+                musicButton.classList.remove(
+                    "music-pendiente"
+                );
+
+
+                /* Marcar como reproduciendo */
+
+                musicButton.classList.add(
+                    "reproduciendo"
+                );
+
+
+                /* Cerrar bienvenida */
+
+                musicIntro.classList.add(
+                    "ocultar"
+                );
+
+
+            })
+
+
+            .catch((error) => {
+
+
+                console.log(
+                    "No se pudo reproducir la música:",
+                    error
+                );
+
+
+            });
+
+
+    }
+
+
+    else {
+
+
+        musica.pause();
+
+
+        musicButton.innerHTML =
+            "🎵";
+
+
+        reproduciendo = false;
+
+
+        musicButton.classList.remove(
+            "reproduciendo"
+        );
+
+
+    }
+
+}
+
+
+
+/* ==========================================================
+   ✨ ANIMACIONES AL HACER SCROLL
+=========================================================== */
+
+const elementos =
+    document.querySelectorAll(
+        ".aparecer"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+
+        (entradas) => {
+
+
+            entradas.forEach(
+                (entrada) => {
+
+
+                    if (
+                        entrada.isIntersecting
+                    ) {
+
+
+                        entrada.target.classList.add(
+                            "visible"
+                        );
+
+
+                    }
+
+                }
+            );
+
+
+        },
+
+        {
+            threshold: 0.15
+        }
+
+    );
+
+
+elementos.forEach(
+    (elemento) => {
+
+        observer.observe(elemento);
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
