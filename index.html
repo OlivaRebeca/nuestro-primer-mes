@@ -1837,10 +1837,11 @@ function toggleMusic() {
                 botonMusicaInicio.innerHTML = "⏸️";
 
             })
-            .catch(() => {
+            .catch((error) => {
 
                 console.log(
-                    "No se pudo reproducir la música."
+                    "No se pudo reproducir la música.",
+                    error
                 );
 
             });
