@@ -1,104 +1,250 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Un pedacito de nuestro inicio 🌿</title>
 
-
     <style>
 
-        /* =====================================================
-           🌿 PALETA
-        ===================================================== */
-
         :root {
-
             --papel: #f5f1e7;
-
             --papel-oscuro: #e8e0d0;
-
             --verde-claro: #dce5d5;
-
             --verde: #a7b99b;
-
             --verde-oscuro: #61705a;
-
             --verde-profundo: #344333;
-
             --rosa: #d8b8b1;
-
             --blanco: #fffdf8;
-
             --sombra: rgba(49, 63, 48, 0.18);
-
         }
-
 
         * {
-
             box-sizing: border-box;
-
             margin: 0;
-
             padding: 0;
-
         }
-
 
         html {
-
             scroll-behavior: smooth;
-
         }
-
 
         body {
-
-            font-family:
-                Georgia,
-                'Times New Roman',
-                serif;
-
+            font-family: Georgia, 'Times New Roman', serif;
             background: var(--papel);
-
             color: var(--verde-profundo);
-
             overflow-x: hidden;
-
         }
 
-
-        /* =====================================================
-           🌿 FONDO
-        ===================================================== */
-
         body::before {
-
             content: "";
-
             position: fixed;
-
             inset: 0;
 
             background-image:
-
                 radial-gradient(
-                    rgba(97,112,90,0.08) 1px,
+                    rgba(97, 112, 90, 0.08) 1px,
                     transparent 1px
                 );
 
             background-size: 25px 25px;
 
             pointer-events: none;
-
             z-index: -1;
+        }
 
+
+        /* =====================================================
+           🎵 PANTALLA INICIAL
+        ===================================================== */
+
+        .inicio-musica {
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(220,229,213,0.9),
+                    rgba(245,241,231,0.98)
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            z-index: 5000;
+
+            padding: 25px;
+
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+
+            transition:
+                opacity 0.8s ease,
+                visibility 0.8s ease;
+        }
+
+        /* ESTA CLASE ES LA QUE CIERRA LA PANTALLA */
+
+        .inicio-musica.oculto {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .inicio-contenido {
+            max-width: 600px;
+
+            background: rgba(255,253,248,0.82);
+
+            padding: 60px 35px;
+
+            border: 1px solid rgba(52,67,51,0.12);
+
+            box-shadow:
+                0 20px 60px var(--sombra);
+
+            position: relative;
+        }
+
+        .inicio-contenido::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 12px;
+
+            border: 1px solid rgba(97,112,90,0.2);
+
+            pointer-events: none;
+        }
+
+        .inicio-hoja {
+            font-size: 45px;
+
+            margin-bottom: 20px;
+
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        .inicio-contenido h1 {
+            font-weight: normal;
+
+            font-size: clamp(32px, 7vw, 55px);
+
+            margin-bottom: 18px;
+        }
+
+        .inicio-contenido h1 span {
+            color: var(--verde-oscuro);
+
+            font-style: italic;
+        }
+
+        .inicio-contenido p {
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            color: #667060;
+
+            margin-bottom: 28px;
+        }
+
+        .instruccion-musica {
+            font-family: Arial, sans-serif;
+
+            font-size: 12px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            color: var(--verde-oscuro);
+
+            margin-bottom: 20px;
+        }
+
+        .boton-musica-inicio {
+            width: 75px;
+            height: 75px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(52,67,51,0.2);
+
+            background: var(--blanco);
+
+            color: var(--verde-profundo);
+
+            font-size: 30px;
+
+            cursor: pointer;
+
+            box-shadow: 0 10px 25px var(--sombra);
+
+            transition: 0.3s;
+
+            animation: latido 1.8s infinite;
+        }
+
+        .boton-musica-inicio:hover {
+            transform: scale(1.1);
+        }
+
+        .mensaje-musica {
+            margin-top: 20px;
+
+            font-size: 13px;
+
+            color: var(--verde-oscuro);
+        }
+
+        .boton-entrar {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 14px 32px;
+
+            background: var(--verde-oscuro);
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 30px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform: translateY(10px);
+
+            transition: 0.5s;
+        }
+
+        .boton-entrar.mostrar {
+            opacity: 1;
+
+            pointer-events: auto;
+
+            transform: translateY(0);
+        }
+
+        .boton-entrar:hover {
+            background: var(--verde-profundo);
+
+            transform: translateY(-3px);
         }
 
 
@@ -107,268 +253,35 @@
         ===================================================== */
 
         .music-button {
-
             position: fixed;
 
             top: 20px;
-
             right: 20px;
 
             width: 48px;
-
             height: 48px;
 
             border-radius: 50%;
 
-            border:
-                1px solid
-                rgba(52,67,51,0.2);
+            border: 1px solid rgba(52,67,51,0.2);
 
-            background:
-                rgba(255,253,248,0.92);
+            background: rgba(255,253,248,0.9);
 
-            color:
-                var(--verde-profundo);
+            color: var(--verde-profundo);
 
             font-size: 20px;
 
             cursor: pointer;
 
-            z-index: 2000;
+            z-index: 1000;
 
-            box-shadow:
-                0 5px 15px var(--sombra);
+            box-shadow: 0 5px 15px var(--sombra);
 
             transition: 0.3s;
-
         }
-
 
         .music-button:hover {
-
             transform: scale(1.1);
-
-        }
-
-
-        /* =====================================================
-           🎵 AVISO INICIAL DE MÚSICA
-        ===================================================== */
-
-        .music-intro {
-
-            position: fixed;
-
-            inset: 0;
-
-            background:
-                rgba(52,67,51,0.62);
-
-            backdrop-filter: blur(7px);
-
-            -webkit-backdrop-filter: blur(7px);
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 25px;
-
-            z-index: 1900;
-
-            opacity: 1;
-
-            visibility: visible;
-
-            transition:
-                opacity 0.7s ease,
-                visibility 0.7s ease;
-
-        }
-
-
-        .music-intro.ocultar {
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            pointer-events: none;
-
-        }
-
-
-        /* =====================================================
-           💌 TARJETA DEL AVISO
-        ===================================================== */
-
-        .music-card {
-
-            width:
-                min(420px, 100%);
-
-            padding:
-                50px 35px;
-
-            background:
-                var(--papel);
-
-            text-align: center;
-
-            position: relative;
-
-            box-shadow:
-                0 25px 70px
-                rgba(0,0,0,0.30);
-
-            animation:
-                aparecerMusica
-                0.9s ease;
-
-        }
-
-
-        .music-card::before {
-
-            content: "";
-
-            position: absolute;
-
-            inset: 14px;
-
-            border:
-                1px solid
-                rgba(97,112,90,0.25);
-
-            pointer-events: none;
-
-        }
-
-
-        .music-card-decoracion {
-
-            font-size: 25px;
-
-            margin-bottom: 5px;
-
-            opacity: 0.8;
-
-        }
-
-
-        .music-note {
-
-            font-size: 42px;
-
-            margin-bottom: 18px;
-
-            animation:
-                notaMusical
-                1.5s
-                ease-in-out
-                infinite;
-
-        }
-
-
-        .music-card h2 {
-
-            font-size: 30px;
-
-            font-weight: normal;
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .music-card p {
-
-            font-size: 16px;
-
-            line-height: 1.8;
-
-            color: #667060;
-
-            max-width: 320px;
-
-            margin: auto;
-
-        }
-
-
-        .flecha-musica {
-
-            margin-top: 25px;
-
-            font-size: 28px;
-
-            color:
-                var(--verde-oscuro);
-
-            animation:
-                flechaMusica
-                1.2s
-                ease-in-out
-                infinite;
-
-        }
-
-
-        .music-card small {
-
-            display: block;
-
-            margin-top: 5px;
-
-            font-family: Arial, sans-serif;
-
-            font-size: 11px;
-
-            letter-spacing: 1px;
-
-            color:
-                var(--verde-oscuro);
-
-        }
-
-
-        .music-card-heart {
-
-            margin-top: 25px;
-
-            font-size: 25px;
-
-            color:
-                var(--verde-oscuro);
-
-        }
-
-
-        /* =====================================================
-           🎵 ANIMACIÓN DEL BOTÓN
-        ===================================================== */
-
-        .music-pendiente {
-
-            animation:
-                llamarMusica
-                1.8s
-                ease-in-out
-                infinite;
-
-        }
-
-
-        .music-button.reproduciendo {
-
-            animation: none;
-
-            background:
-                var(--verde-claro);
-
         }
 
 
@@ -377,7 +290,6 @@
         ===================================================== */
 
         .portada {
-
             min-height: 100vh;
 
             display: flex;
@@ -389,14 +301,10 @@
             padding: 30px;
 
             position: relative;
-
         }
 
-
         .portada-contenido {
-
-            width:
-                min(700px, 100%);
+            width: min(700px, 100%);
 
             text-align: center;
 
@@ -408,38 +316,27 @@
                     rgba(255,255,255,0.45)
                 );
 
-            border:
-                1px solid
-                rgba(52,67,51,0.12);
+            border: 1px solid rgba(52,67,51,0.12);
 
             box-shadow:
-                0 20px 50px
-                var(--sombra);
+                0 20px 50px var(--sombra);
 
             position: relative;
-
         }
 
-
         .portada-contenido::before {
-
             content: "";
 
             position: absolute;
 
             inset: 12px;
 
-            border:
-                1px solid
-                rgba(97,112,90,0.25);
+            border: 1px solid rgba(97,112,90,0.25);
 
             pointer-events: none;
-
         }
 
-
         .pequeno-texto {
-
             font-family: Arial, sans-serif;
 
             text-transform: uppercase;
@@ -448,86 +345,59 @@
 
             font-size: 12px;
 
-            color:
-                var(--verde-oscuro);
+            color: var(--verde-oscuro);
 
             margin-bottom: 25px;
-
         }
 
-
         .portada h1 {
-
-            font-size:
-                clamp(42px,8vw,80px);
+            font-size: clamp(42px, 8vw, 80px);
 
             font-weight: normal;
 
             line-height: 1;
 
             margin-bottom: 25px;
-
         }
-
 
         .portada h1 span {
-
-            color:
-                var(--verde-oscuro);
+            color: var(--verde-oscuro);
 
             font-style: italic;
-
         }
 
-
         .nombres {
-
             font-size: 25px;
 
             margin-bottom: 10px;
-
         }
 
-
         .fecha {
-
             font-family: Arial, sans-serif;
 
-            color:
-                var(--verde-oscuro);
+            color: var(--verde-oscuro);
 
             letter-spacing: 2px;
 
             font-size: 13px;
-
         }
 
-
         .hojita {
-
             font-size: 35px;
 
             margin: 30px 0;
 
-            animation:
-                flotar
-                3s
-                ease-in-out
-                infinite;
-
+            animation: flotar 3s ease-in-out infinite;
         }
 
-
         .abrir {
-
             display: inline-block;
 
             margin-top: 35px;
 
             padding: 14px 30px;
 
-            background:
-                var(--verde-oscuro);
+            background: var(--verde-oscuro);
 
             color: white;
 
@@ -540,18 +410,12 @@
             font-size: 14px;
 
             transition: 0.3s;
-
         }
 
-
         .abrir:hover {
+            background: var(--verde-profundo);
 
-            background:
-                var(--verde-profundo);
-
-            transform:
-                translateY(-3px);
-
+            transform: translateY(-3px);
         }
 
 
@@ -560,62 +424,45 @@
         ===================================================== */
 
         section {
-
-            width:
-                min(1100px,92%);
+            width: min(1100px, 92%);
 
             margin: auto;
 
             padding: 100px 0;
-
         }
 
-
         .titulo-seccion {
-
             text-align: center;
 
             margin-bottom: 60px;
-
         }
 
-
         .titulo-seccion small {
-
             font-family: Arial, sans-serif;
 
             text-transform: uppercase;
 
             letter-spacing: 3px;
 
-            color:
-                var(--verde-oscuro);
+            color: var(--verde-oscuro);
 
             font-size: 11px;
-
         }
 
-
         .titulo-seccion h2 {
-
-            font-size:
-                clamp(35px,6vw,55px);
+            font-size: clamp(35px, 6vw, 55px);
 
             font-weight: normal;
 
             margin-top: 10px;
-
         }
 
-
         .titulo-seccion p {
-
             margin-top: 15px;
 
             color: #667060;
 
             font-style: italic;
-
         }
 
 
@@ -624,50 +471,35 @@
         ===================================================== */
 
         .historia {
-
             display: grid;
 
-            grid-template-columns:
-                1fr 1fr;
+            grid-template-columns: 1fr 1fr;
 
             gap: 60px;
 
             align-items: center;
-
         }
-
 
         .foto-principal {
+            background: var(--blanco);
 
-            background:
-                var(--blanco);
+            padding: 15px 15px 50px;
 
-            padding:
-                15px 15px 50px;
+            box-shadow: 0 15px 30px var(--sombra);
 
-            box-shadow:
-                0 15px 30px
-                var(--sombra);
-
-            transform:
-                rotate(-2deg);
+            transform: rotate(-2deg);
 
             position: relative;
-
         }
 
-
         .foto-principal::after {
-
-            content:
-                "24/07/2026";
+            content: "Nuestro comienzo";
 
             position: absolute;
 
             bottom: 15px;
 
             left: 0;
-
             right: 0;
 
             text-align: center;
@@ -677,12 +509,9 @@
             font-size: 11px;
 
             color: #777;
-
         }
 
-
         .foto-principal img {
-
             width: 100%;
 
             height: 420px;
@@ -690,32 +519,22 @@
             object-fit: cover;
 
             display: block;
-
         }
 
-
         .historia-texto {
-
             font-size: 18px;
 
             line-height: 1.9;
-
         }
 
-
         .historia-texto .decoracion {
-
             font-size: 30px;
 
             margin-bottom: 20px;
-
         }
 
-
         .historia-texto p {
-
             margin-bottom: 20px;
-
         }
 
 
@@ -724,83 +543,60 @@
         ===================================================== */
 
         .galeria {
-
             display: grid;
 
-            grid-template-columns:
-                repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
 
             gap: 35px;
 
             align-items: start;
-
         }
 
-
         .polaroid {
+            background: var(--blanco);
 
-            background:
-                var(--blanco);
+            padding: 12px 12px 45px;
 
-            padding:
-                12px 12px 45px;
-
-            box-shadow:
-                0 12px 25px
-                var(--sombra);
+            box-shadow: 0 12px 25px var(--sombra);
 
             position: relative;
 
             transition: 0.4s;
 
             cursor: pointer;
-
         }
-
 
         .polaroid:nth-child(1) {
             transform: rotate(-3deg);
         }
 
-
         .polaroid:nth-child(2) {
             transform: rotate(2deg);
         }
-
 
         .polaroid:nth-child(3) {
             transform: rotate(-1deg);
         }
 
-
         .polaroid:nth-child(4) {
             transform: rotate(3deg);
         }
-
 
         .polaroid:nth-child(5) {
             transform: rotate(-2deg);
         }
 
-
         .polaroid:nth-child(6) {
             transform: rotate(2deg);
         }
 
-
         .polaroid:hover {
-
-            transform:
-                rotate(0deg)
-                scale(1.05);
+            transform: rotate(0deg) scale(1.05);
 
             z-index: 5;
-
         }
 
-
         .polaroid img {
-
             width: 100%;
 
             height: 250px;
@@ -809,20 +605,15 @@
 
             display: block;
 
-            background:
-                var(--papel-oscuro);
-
+            background: var(--papel-oscuro);
         }
 
-
         .polaroid p {
-
             position: absolute;
 
             bottom: 13px;
 
             left: 10px;
-
             right: 10px;
 
             text-align: center;
@@ -832,7 +623,6 @@
             font-size: 14px;
 
             color: #596051;
-
         }
 
 
@@ -841,90 +631,61 @@
         ===================================================== */
 
         .mensajes {
-
             display: grid;
 
-            grid-template-columns:
-                repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
 
             gap: 35px;
 
             margin-top: 40px;
-
         }
 
-
         .nota {
-
-            background:
-                #fffdf7;
+            background: #fffdf7;
 
             padding: 30px;
 
-            box-shadow:
-                0 10px 25px
-                var(--sombra);
+            box-shadow: 0 10px 25px var(--sombra);
 
             position: relative;
 
             font-size: 17px;
 
             line-height: 1.7;
-
         }
-
 
         .nota:nth-child(even) {
+            background: #edf2e8;
 
-            background:
-                #edf2e8;
-
-            transform:
-                rotate(1deg);
-
+            transform: rotate(1deg);
         }
-
 
         .nota:nth-child(odd) {
-
-            transform:
-                rotate(-1deg);
-
+            transform: rotate(-1deg);
         }
 
-
         .nota::before {
-
             content: "";
 
             width: 65px;
-
             height: 18px;
 
-            background:
-                rgba(216,184,177,0.65);
+            background: rgba(216,184,177,0.65);
 
             position: absolute;
 
             top: -8px;
-
             left: 50%;
 
-            transform:
-                translateX(-50%)
-                rotate(-2deg);
-
+            transform: translateX(-50%) rotate(-2deg);
         }
 
-
         .nota small {
-
             display: block;
 
             margin-top: 15px;
 
-            color:
-                var(--verde-oscuro);
+            color: var(--verde-oscuro);
 
             font-family: Arial, sans-serif;
 
@@ -933,84 +694,59 @@
             text-transform: uppercase;
 
             letter-spacing: 2px;
-
         }
 
 
         /* =====================================================
-           🌱 RAZONES
+           🌱 COSAS QUE AMO
         ===================================================== */
 
         .razones {
-
             display: grid;
 
-            grid-template-columns:
-                repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
 
             gap: 25px;
-
         }
 
-
         .razon {
-
             padding: 35px 25px;
 
-            background:
-                rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.55);
 
-            border:
-                1px solid
-                rgba(52,67,51,0.1);
+            border: 1px solid rgba(52,67,51,0.1);
 
             text-align: center;
 
             transition: 0.3s;
-
         }
-
 
         .razon:hover {
+            transform: translateY(-8px);
 
-            transform:
-                translateY(-8px);
-
-            box-shadow:
-                0 15px 30px
-                var(--sombra);
-
+            box-shadow: 0 15px 30px var(--sombra);
         }
 
-
         .razon .icono {
-
             font-size: 30px;
 
             margin-bottom: 15px;
-
         }
 
-
         .razon h3 {
-
             font-weight: normal;
 
             font-size: 21px;
 
             margin-bottom: 12px;
-
         }
 
-
         .razon p {
-
             color: #667060;
 
             line-height: 1.6;
 
             font-size: 15px;
-
         }
 
 
@@ -1019,61 +755,55 @@
         ===================================================== */
 
         .carta-contenedor {
-
             max-width: 750px;
 
             margin: auto;
 
-            background:
-                #fffdf7;
+            background: #fffdf7;
 
             padding: 60px;
 
-            box-shadow:
-                0 20px 45px
-                var(--sombra);
+            box-shadow: 0 20px 45px var(--sombra);
 
             position: relative;
 
             line-height: 2;
 
             font-size: 18px;
-
         }
 
-
         .carta-contenedor::before {
-
             content: "";
 
             position: absolute;
 
             inset: 18px;
 
-            border:
-                1px solid
-                rgba(97,112,90,0.2);
+            border: 1px solid rgba(97,112,90,0.2);
 
             pointer-events: none;
-
         }
 
+        .carta-contenedor h2 {
+            text-align: center;
+
+            font-weight: normal;
+
+            margin-bottom: 35px;
+
+            font-size: 35px;
+        }
 
         .carta-contenedor p {
-
             margin-bottom: 20px;
-
         }
 
-
         .firma {
-
             text-align: right;
 
             font-style: italic;
 
             margin-top: 35px;
-
         }
 
 
@@ -1082,7 +812,6 @@
         ===================================================== */
 
         .final {
-
             min-height: 80vh;
 
             display: flex;
@@ -1093,53 +822,37 @@
 
             text-align: center;
 
+            position: relative;
         }
 
-
         .final h2 {
-
-            font-size:
-                clamp(45px,8vw,85px);
+            font-size: clamp(45px, 8vw, 85px);
 
             font-weight: normal;
 
             line-height: 1.1;
-
         }
-
 
         .final h2 span {
-
-            color:
-                var(--verde-oscuro);
+            color: var(--verde-oscuro);
 
             font-style: italic;
-
         }
 
-
         .final p {
-
             margin-top: 25px;
 
             font-size: 18px;
 
             color: #667060;
-
         }
 
-
         .corazon-final {
-
             font-size: 45px;
 
             margin-top: 30px;
 
-            animation:
-                latido
-                1.5s
-                infinite;
-
+            animation: latido 1.5s infinite;
         }
 
 
@@ -1148,157 +861,37 @@
         ===================================================== */
 
         @keyframes flotar {
-
             0%,100% {
-
-                transform:
-                    translateY(0);
-
+                transform: translateY(0);
             }
 
             50% {
-
-                transform:
-                    translateY(-10px);
-
+                transform: translateY(-10px);
             }
-
         }
-
 
         @keyframes latido {
-
             0%,100% {
-
-                transform:
-                    scale(1);
-
+                transform: scale(1);
             }
 
             50% {
-
-                transform:
-                    scale(1.15);
-
+                transform: scale(1.15);
             }
-
         }
-
-
-        @keyframes llamarMusica {
-
-            0%,100% {
-
-                transform:
-                    scale(1);
-
-                box-shadow:
-                    0 5px 15px
-                    var(--sombra);
-
-            }
-
-            50% {
-
-                transform:
-                    scale(1.12);
-
-                box-shadow:
-                    0 0 0 10px
-                    rgba(167,185,155,0.20),
-                    0 8px 20px
-                    var(--sombra);
-
-            }
-
-        }
-
-
-        @keyframes notaMusical {
-
-            0%,100% {
-
-                transform:
-                    rotate(-5deg)
-                    translateY(0);
-
-            }
-
-            50% {
-
-                transform:
-                    rotate(5deg)
-                    translateY(-6px);
-
-            }
-
-        }
-
-
-        @keyframes flechaMusica {
-
-            0%,100% {
-
-                transform:
-                    translateY(0);
-
-            }
-
-            50% {
-
-                transform:
-                    translateY(-8px);
-
-            }
-
-        }
-
-
-        @keyframes aparecerMusica {
-
-            from {
-
-                opacity: 0;
-
-                transform:
-                    translateY(25px)
-                    scale(0.95);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-            }
-
-        }
-
 
         .aparecer {
-
             opacity: 0;
 
-            transform:
-                translateY(30px);
+            transform: translateY(30px);
 
-            transition:
-                1s ease;
-
+            transition: 1s ease;
         }
 
-
         .aparecer.visible {
-
             opacity: 1;
 
-            transform:
-                translateY(0);
-
+            transform: translateY(0);
         }
 
 
@@ -1306,108 +899,65 @@
            📱 RESPONSIVE
         ===================================================== */
 
-        @media (max-width:800px) {
+        @media (max-width: 800px) {
 
             section {
-
                 padding: 70px 0;
-
             }
 
-
             .historia {
-
                 grid-template-columns: 1fr;
 
                 gap: 40px;
-
             }
-
 
             .foto-principal img {
-
                 height: 350px;
-
             }
 
-
             .galeria {
-
-                grid-template-columns:
-                    repeat(2,1fr);
+                grid-template-columns: repeat(2, 1fr);
 
                 gap: 20px;
-
             }
-
 
             .mensajes {
-
                 grid-template-columns: 1fr;
-
             }
-
 
             .razones {
-
-                grid-template-columns:
-                    1fr 1fr;
-
+                grid-template-columns: 1fr 1fr;
             }
-
 
             .carta-contenedor {
-
-                padding:
-                    40px 25px;
-
+                padding: 40px 25px;
             }
-
         }
 
-
-        @media (max-width:550px) {
+        @media (max-width: 550px) {
 
             .galeria {
-
                 grid-template-columns: 1fr;
-
             }
-
 
             .razones {
-
                 grid-template-columns: 1fr;
-
             }
-
 
             .portada-contenido {
-
-                padding:
-                    60px 20px;
-
+                padding: 60px 20px;
             }
-
 
             .portada h1 {
-
                 font-size: 45px;
-
             }
 
-
-            .music-card {
-
-                padding:
-                    45px 25px;
-
+            .inicio-contenido {
+                padding: 50px 25px;
             }
-
         }
 
     </style>
-
 </head>
 
 
@@ -1415,118 +965,113 @@
 
 
 <!-- ==========================================================
-     🎵 BOTÓN DE MÚSICA
+     🎵 PANTALLA PARA ACTIVAR LA MÚSICA
 =========================================================== -->
 
-<button
-    class="music-button music-pendiente"
-    onclick="toggleMusic()"
-    id="musicButton"
-    aria-label="Reproducir nuestra canción">
+<div class="inicio-musica" id="inicioMusica">
 
-    🎵
+    <div class="inicio-contenido">
 
-</button>
-
-
-
-<!-- ==========================================================
-     💌 AVISO PARA DANI
-=========================================================== -->
-
-<div
-    class="music-intro"
-    id="musicIntro">
-
-    <div class="music-card">
-
-        <div class="music-card-decoracion">
+        <div class="inicio-hoja">
             🌿
         </div>
 
+        <div class="pequeno-texto">
+            Para ti, Dani
+        </div>
 
-        <h2>
+        <h1>
             Antes de comenzar...
-        </h2>
+        </h1>
 
         <p>
-
-            Hay una canción que quiero que
-            escuches mientras recorres
-            este pequeño pedacito de nosotros.
-
+            Hay algo que quiero que escuches
+            mientras recorres este pequeño pedacito
+            de nuestra historia.
         </p>
 
-        <div class="flecha-musica">
-            ↑
+        <div class="instruccion-musica">
+            Toca la música para comenzar
         </div>
 
-        <small>
+        <button
+            class="boton-musica-inicio"
+            onclick="iniciarMusica()"
+            id="botonMusicaInicio">
+            🎵
+        </button>
 
-            Toca el ícono 🎵 de arriba a la derecha
-            para comenzar
-
-        </small>
-
-        <div class="music-card-heart">
-            ♡
+        <div class="mensaje-musica" id="mensajeMusica">
+            Primero la música... después nuestro recuerdo. 🤍
         </div>
+
+        <a
+            href="#inicio"
+            class="boton-entrar"
+            id="botonEntrar"
+            onclick="entrarAlAlbum(event)">
+
+            Entrar a nuestro álbum 🌿
+
+        </a>
 
     </div>
 
 </div>
 
 
-
 <!-- ==========================================================
      🎵 MÚSICA
 =========================================================== -->
 
-<audio
-    id="musica"
-    loop>
+<button
+    class="music-button"
+    onclick="toggleMusic()"
+    id="musicButton">
+
+    🎵
+
+</button>
+
+
+<audio id="musica" loop>
 
     <source
-        src="musica/nuestra-cancion.mp3"
+        src="nuestra-cancion.mp3"
         type="audio/mpeg">
 
 </audio>
-
 
 
 <!-- ==========================================================
      🌿 PORTADA
 =========================================================== -->
 
-<header class="portada">
+<header
+    class="portada"
+    id="inicio">
 
     <div class="portada-contenido">
 
         <div class="pequeno-texto">
 
             24·07·2026
-            &nbsp;—&nbsp;
+            &nbsp; ---- &nbsp;
             24·08·2026
 
         </div>
-
 
         <div class="hojita">
             🌿
         </div>
 
-
         <h1>
 
             Un pedacito<br>
 
-            de
-            <span>
-                nuestro inicio
-            </span>
+            de <span>nuestro inicio</span>
 
         </h1>
-
 
         <div class="nombres">
 
@@ -1534,13 +1079,11 @@
 
         </div>
 
-
         <div class="fecha">
 
             Nuestro primer mes
 
         </div>
-
 
         <a
             href="#historia"
@@ -1553,7 +1096,6 @@
     </div>
 
 </header>
-
 
 
 <!-- ==========================================================
@@ -1573,8 +1115,7 @@
         </h2>
 
         <p>
-            Porque toda historia bonita
-            tiene un segundo inicio.
+            Porque toda historia bonita tiene un segundo inicio.
         </p>
 
     </div>
@@ -1582,11 +1123,10 @@
 
     <div class="historia">
 
-
         <div class="foto-principal aparecer">
 
             <img
-                src="fotos/historia.jpg"
+                src="historia.jpg"
                 alt="Nuestro comienzo">
 
         </div>
@@ -1598,52 +1138,33 @@
                 🌿
             </div>
 
-
             <p>
-
-                Todo comenzó con una solicitud
-                en Instagram. Después nos borramos
-                —yo lo hice pipi—, volvimos a
-                seguirnos y empezamos a hablar
-                por Instagram, hasta pasar a
-                WhatsApp.
-
+                Aquí quiero recordar cómo iniciamos...
             </p>
 
-
             <p>
-
+                Todo comenzó con una solicitud en Instagram.
+                Después nos borramos (yo lo hice pipi),
+                volvimos a seguirnos y empezamos a hablar
+                por Instagram, hasta pasar a WhatsApp.
                 Con el tiempo dejamos de hablar,
-                pero cada vez me gustabas más
-                y ya no podía esconder las ganas
-                de conocerte.
-
+                pero cada vez me gustabas más y ya no podía
+                esconder las ganas de conocerte.
             </p>
 
-
             <p>
-
-                Sin saber muy bien cómo acercarme
-                de nuevo, un día te propuse ir a
-                ver la película de los Minions.
-
-                Fue mi forma de buscar una excusa
-                para volver a estar cerca de ti,
-                porque en el fondo solo sabía
-                que quería conocerte más.
-
+                Sin saber muy bien cómo acercarme de nuevo,
+                un día te propuse ir a ver la película de
+                los Minions. Fue mi forma de buscar
+                una excusa para volver a estar cerca de ti,
+                porque en el fondo solo sabía que quería
+                conocerte más.
             </p>
 
-
             <p>
-
-                Y así comenzaron las risas,
-                los audios interminables que amo
-                y nuestros días acompañándonos
-                por llamadas.
-
-                ❤️
-
+                Y así comenzaron las risas, los audios
+                interminables que amo y nuestros días
+                acompañándonos por llamadas. ❤️
             </p>
 
         </div>
@@ -1653,9 +1174,8 @@
 </section>
 
 
-
 <!-- ==========================================================
-     📸 RECUERDOS
+     📸 NUESTROS RECUERDOS
 =========================================================== -->
 
 <section>
@@ -1671,8 +1191,7 @@
         </h2>
 
         <p>
-            Algunos de los recuerdos
-            que quiero guardar para siempre.
+            Algunos de los recuerdos que quiero guardar para siempre.
         </p>
 
     </div>
@@ -1682,246 +1201,120 @@
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto01.jpg"
-                alt="Recuerdo 1">
-
-            <p>
-                24-07-2026 🤍
-            </p>
-
+            <img src="foto01.jpg" alt="Recuerdo 1">
+            <p>24-07-2026 🤍</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto02.jpg"
-                alt="Recuerdo 2">
-
-            <p>
-                nuestro día
-            </p>
-
+            <img src="foto02.jpg" alt="Recuerdo 2">
+            <p>nuestro día</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto03.jpg"
-                alt="Recuerdo 3">
-
-            <p>
-                nuestra primer foto
-            </p>
-
+            <img src="foto03.jpg" alt="Recuerdo 3">
+            <p>nuestra primer foto</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto04.jpg"
-                alt="Recuerdo 4">
-
-            <p>
-                gymtime
-            </p>
-
+            <img src="foto04.jpg" alt="Recuerdo 4">
+            <p>gymtime</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto05.jpg"
-                alt="Recuerdo 5">
-
-            <p>
-                first date at the theater
-            </p>
-
+            <img src="foto05.jpg" alt="Recuerdo 5">
+            <p>first date at the theater</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto06.jpg"
-                alt="Recuerdo 6">
-
-            <p>
-                second date at the theater
-            </p>
-
+            <img src="foto06.jpg" alt="Recuerdo 6">
+            <p>second date at the theater</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto07.jpg"
-                alt="Recuerdo 7">
-
-            <p>
-                Acatenango
-            </p>
-
+            <img src="foto07.jpg" alt="Recuerdo 7">
+            <p>Acatenango</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto08.jpg"
-                alt="Recuerdo 8">
-
-            <p>
-                entierrados, pero felices
-            </p>
-
+            <img src="foto08.jpg" alt="Recuerdo 8">
+            <p>entierrados, pero felices</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto09.jpg"
-                alt="Recuerdo 9">
-
-            <p>
-                de mis favoritas
-            </p>
-
+            <img src="foto09.jpg" alt="Recuerdo 9">
+            <p>de mis favoritas</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto10.jpg"
-                alt="Recuerdo 10">
-
-            <p>
-                por usted me voy hasta Petén
-            </p>
-
+            <img src="foto10.jpg" alt="Recuerdo 10">
+            <p>por usted me voy hasta Petén</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto11.jpg"
-                alt="Recuerdo 11">
-
-            <p>
-                comiditas 💚
-            </p>
-
+            <img src="foto11.jpg" alt="Recuerdo 11">
+            <p>comiditas 💚</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto12.jpg"
-                alt="Recuerdo 12">
-
-            <p>
-                asustadísima, pero feliz
-            </p>
-
+            <img src="foto12.jpg" alt="Recuerdo 12">
+            <p>asustadísima, pero feliz</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto13.jpg"
-                alt="Recuerdo 13">
-
-            <p>
-                🤍
-            </p>
-
+            <img src="foto13.jpg" alt="Recuerdo 13">
+            <p>🤍</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto14.jpg"
-                alt="Recuerdo 14">
-
-            <p>
-                💚
-            </p>
-
+            <img src="foto14.jpg" alt="Recuerdo 14">
+            <p>💚</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto15.jpg"
-                alt="Recuerdo 15">
-
-            <p>
-                primera feria
-            </p>
-
+            <img src="foto15.jpg" alt="Recuerdo 15">
+            <p>primera feria</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto16.jpg"
-                alt="Recuerdo 16">
-
-            <p>
-                primera feria
-            </p>
-
+            <img src="foto16.jpg" alt="Recuerdo 16">
+            <p>primera feria</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto17.jpg"
-                alt="Recuerdo 17">
-
-            <p>
-                siempre tú 💚
-            </p>
-
+            <img src="foto17.jpg" alt="Recuerdo 17">
+            <p>siempre tú 💚</p>
         </div>
 
 
         <div class="polaroid aparecer">
-
-            <img
-                src="fotos/foto18.jpg"
-                alt="Recuerdo 18">
-
-            <p>
-                super chiveada jajaja
-            </p>
-
+            <img src="foto18.jpg" alt="Recuerdo 18">
+            <p>super chiveada jajaja</p>
         </div>
+
 
     </div>
 
 </section>
 
 
-
 <!-- ==========================================================
-     💬 MENSAJES
+     💬 MENSAJES BONITOS
 =========================================================== -->
 
 <section>
@@ -1948,9 +1341,8 @@
 
         <div class="nota aparecer">
 
-            “Si mando a mi deste al colegio
-            le hacen bullying por lo gordo que
-            se pone con esas fotos ❤️”
+            “Si mando a mi deste al colegio le hacen bullyng
+            por lo gordo que se pone con esas fotos ❤️”
 
             <small>
                 — Dani 🤍
@@ -1961,8 +1353,7 @@
 
         <div class="nota aparecer">
 
-            “Cuando termine voy a escribir
-            tu nombre con mi semen.”
+            “Cuando termine voy a escribir tu nombre con mi semen.”
 
             <small>
                 — Dani 🌿
@@ -1973,9 +1364,8 @@
 
         <div class="nota aparecer">
 
-            “Ya voy de camino con el deste
-            al aire apuntando puro GPS
-            para su casa.”
+            “Ya voy de camino con el deste al aire apuntando puro
+            GPS para su casa.”
 
             <small>
                 — Dani 💌
@@ -1998,7 +1388,6 @@
     </div>
 
 </section>
-
 
 
 <!-- ==========================================================
@@ -2038,17 +1427,14 @@
             </h3>
 
             <p>
-
-                Amo lo chistoso que eres,
-                esa facilidad que tienes para
-                hacerme reír y cómo siempre
-                terminamos riéndonos de las
-                mismas cosas.
-
-                Amo tu inteligencia,
-                tu carisma y, sobre todo,
-                la bondad que llevas dentro.
-
+                Amo lo chistoso que eres, esa facilidad
+                que tienes para hacerme reír y cómo
+                siempre terminamos riéndonos de las
+                mismas cosas. Amo tu inteligencia,
+                tu carisma y, sobre todo, la bondad
+                que llevas dentro. Me encanta la
+                forma en que puedes ser tan especial
+                sin dejar de ser tú.
             </p>
 
         </div>
@@ -2065,20 +1451,14 @@
             </h3>
 
             <p>
-
-                Contigo me siento entendida,
-                cuidada y amada.
-
-                Me encanta poder ser yo misma
-                contigo y saber que entiendes
-                hasta esas pequeñas partes raras
-                de mí que no siempre sé explicar.
-
-                A tu lado siento una tranquilidad
-                muy bonita.
-
-                Me das paz.
-
+                Contigo me siento entendida, cuidada y
+                amada. Me encanta poder ser yo misma
+                contigo, saber que entiendes hasta esas
+                pequeñas partes raras de mí que no siempre
+                sé explicar. A tu lado siento una
+                tranquilidad muy bonita, como si
+                estuviera exactamente donde quiero
+                estar. Me das paz.
             </p>
 
         </div>
@@ -2095,17 +1475,17 @@
             </h3>
 
             <p>
-
-                Admiro muchísimo la visión
-                que tienes de tu vida,
-                de lo que quieres construir
-                y del hombre que eres.
-
-                Admiro tu deseo de formar
-                una familia, pero sobre todo
-                admiro que Dios tenga un lugar
-                tan importante en tu corazón.
-
+                Admiro muchísimo la visión que
+                tienes de tu vida, de lo que
+                quieres construir y del hombre
+                que eres y que quieres llegar a ser.
+                Admiro la manera en que ves tu futuro y
+                tu deseo de formar una familia,
+                pero sobre todo admiro que Dios
+                tenga un lugar tan importante
+                en tu corazón. Eso es algo que
+                respeto y admiro profundamente
+                de ti.
             </p>
 
         </div>
@@ -2122,18 +1502,19 @@
             </h3>
 
             <p>
-
-                Amo la delicadeza con la que
-                me hablas y me tratas.
-
-                Amo cómo me besas con tanto amor,
-                cómo me abrazas y la manera
-                tan bonita en que me haces
-                sentir querida.
-
-                Y amo cuando buscamos
-                nuestras manitas al acostarnos.
-
+                Amo la delicadeza con la que me
+                hablas y me tratas. Amo cómo me
+                besas con tanto amor, cómo me
+                abrazas y la manera tan bonita
+                en que me haces sentir querida.
+                Y amo especialmente esas veces
+                en las que nos acostamos y
+                simplemente buscamos nuestras
+                manitas, porque sé que te gusta
+                tomarme de la mano tanto como a
+                mí me gusta tomar la tuya. Son
+                cosas pequeñas, pero para mí
+                significan muchísimo.
             </p>
 
         </div>
@@ -2150,18 +1531,15 @@
             </h3>
 
             <p>
-
-                Nuestras manos encontrándose,
-                reírnos de una tontería que solo
-                nosotros entendemos, tus abrazos,
-                tus besos y simplemente estar
-                acostados juntos sin necesitar
-                nada más.
-
-                Son esas pequeñas cosas las que
-                hacen que estar contigo se sienta
-                tan bonito.
-
+                A veces son las cosas más sencillas
+                las que más guardo en mi corazón:
+                nuestras manos encontrándose, reírnos
+                de una tontería que solo nosotros
+                entendemos, tus abrazos, tus besos,
+                la forma en que me miras o simplemente
+                estar acostados juntos sin necesitar nada
+                más. Son esos pequeños momentos los que
+                hacen que estar contigo se sienta tan bonito.
             </p>
 
         </div>
@@ -2178,28 +1556,25 @@
             </h3>
 
             <p>
-
-                Amo lo que estamos construyendo.
-
-                Me emociona pensar que apenas
-                llevamos un mes y ya existen
-                tantos recuerdos que quiero
-                guardar.
-
-                Quiero seguir descubriéndote,
-                acompañarte y construir poquito
-                a poquito algo que tenga amor,
-                respeto, complicidad y a Dios
-                en el centro.
-
+                Amo lo que estamos construyendo. Me
+                emociona pensar que apenas llevamos
+                un mes y ya existen tantos pequeños
+                recuerdos que quiero guardar. Me gusta
+                crecer contigo, admirarte y aprender de
+                ti, pero también me emociona pensar en
+                todo lo que todavía nos falta vivir.
+                Quiero seguir descubriéndote, acompañarte
+                y construir poquito a poquito algo que
+                siempre tenga amor, respeto, complicidad
+                y a Dios en el centro.
             </p>
 
         </div>
 
+
     </div>
 
 </section>
-
 
 
 <!-- ==========================================================
@@ -2223,117 +1598,80 @@
 
     <div class="carta-contenedor aparecer">
 
-
         <p>
             Mi amor,
         </p>
 
 
         <p>
-
-            Hoy cumplimos nuestro primer mes y,
-            aunque pueda parecer poquito tiempo,
-            para mí significa muchísimo.
-
-            Me hace feliz pensar que este es apenas
-            un pedacito de nuestro inicio, porque
-            todavía nos queda tanto por vivir
-            y descubrir juntos.
-
+            Hoy cumplimos nuestro primer mes y, aunque
+            pueda parecer poquito tiempo, para mí significa
+            muchísimo. Me hace feliz pensar que este es apenas
+            un pedacito de nuestro inicio, porque todavía nos
+            queda tanto por vivir y descubrir juntos.
         </p>
 
 
         <p>
-
-            Quiero agradecerte especialmente por
-            algo que nunca voy a olvidar:
-
-            no cualquiera acompaña a alguien durante
-            un proceso de salud, y mucho menos
-            acompaña también los miedos y las
-            preocupaciones que vienen con él.
-
-            Tú pudiste dejar que el miedo decidiera
-            por nosotros, pero tu corazón fue mucho
-            más grande.
-
-            Elegiste poner nuestro amor por encima
-            de esos temores y seguir conociéndonos,
-            seguir construyendo esto y seguir viendo
-            quiénes somos juntos.
-
+            Quiero agradecerte especialmente por algo que nunca
+            voy a olvidar: no cualquiera acompaña a alguien
+            durante un proceso de salud, y mucho menos acompaña
+            también los miedos y las preocupaciones que vienen
+            con él. Tú pudiste dejar que el miedo decidiera por
+            nosotros, pero tu corazón fue mucho más grande.
+            Elegiste poner nuestro amor por encima de esos
+            temores y seguir conociéndonos, seguir construyendo
+            esto y seguir viendo quiénes somos juntos.
         </p>
 
 
         <p>
-
-            Gracias por no haberme dejado aquel día
-            en el momento en el que nuestra historia
-            apenas comenzaba.
-
-            Gracias por quedarte, por entenderme
-            y por quererme tal como soy,
-            incluso en una etapa en la que quizá
-            no todo es sencillo.
-
-            Gracias por tu paciencia
-            y tanto amor.
-
+            Gracias por no haberme dejado aquel día en el momento
+            en el que nuestra historia apenas comenzaba.
+            Gracias por quedarte, por entenderme y por quererme
+            tal como soy, incluso en una etapa en la que quizá
+            no todo es sencillo. Gracias por tu paciencia y
+            tanto amor.
         </p>
 
 
         <p>
-
-            Te admiro por el hombre que eres,
-            por tu inteligencia, tu bondad,
-            tu forma de querer, tu visión de vida
-            y por ese corazón en el que Dios tiene
-            un lugar tan bonito.
-
-            Me encanta poder reírme contigo por
-            las mismas tonterías, sentirme entendida
-            y encontrar tanta ternura en cosas tan
-            pequeñas como cuando buscamos nuestras
-            manos al acostarnos.
-
+            Te admiro por el hombre que eres, por tu inteligencia,
+            tu bondad, tu forma de querer, tu visión de vida y por
+            ese corazón en el que Dios tiene un lugar tan bonito.
+            Me encanta poder reírme contigo por las mismas tonterías,
+            sentirme entendida y encontrar tanta ternura en cosas
+            tan pequeñas como cuando buscamos nuestras manos al
+            acostarnos.
         </p>
 
 
         <p>
-
-            Quiero seguir descubriéndote,
-            acompañándote, admirándote
-            y creciendo contigo.
-
-            Quiero guardar cada pequeño momento
-            de nosotros, porque sé que algún día
-            miraremos hacia atrás y veremos cuánto
-            empezó a crecer desde este primer mes.
-
+            Quiero seguir descubriéndote, acompañándote,
+            admirándote y creciendo contigo. Quiero guardar cada
+            pequeño momento de nosotros, porque sé que algún día
+            miraremos hacia atrás y veremos cuánto empezó a crecer
+            desde este primer mes.
         </p>
 
 
         <p>
-
-            Gracias por elegirme,
-            por quedarte y por dejarme
+            Gracias por elegirme, por quedarte y por dejarme
             elegirte también.
-
         </p>
 
 
         <p>
-
             Feliz primer mes, mi amor.
-
+            <br>
             Esto apenas comienza. 🌿🤍
-
         </p>
 
 
         <div class="firma">
 
-            Con amor,<br>
+            Con amor,
+            <br>
 
             Rebe 🤍
 
@@ -2342,7 +1680,6 @@
     </div>
 
 </section>
-
 
 
 <!-- ==========================================================
@@ -2354,9 +1691,7 @@
     <div>
 
         <div class="pequeno-texto">
-
             24 · 08 · 2026
-
         </div>
 
 
@@ -2364,9 +1699,7 @@
 
             Rebe
 
-            <span>
-                ♡
-            </span>
+            <span>♡</span>
 
             Dani
 
@@ -2374,19 +1707,14 @@
 
 
         <p>
-
             Nuestro primer mes.
             <br>
-
             Y apenas estamos comenzando.
-
         </p>
 
 
         <div class="corazon-final">
-
             💚
-
         </div>
 
     </div>
@@ -2394,109 +1722,142 @@
 </section>
 
 
-
 <script>
 
-
 /* ==========================================================
-   🎵 MÚSICA
+   🎵 ELEMENTOS DE LA MÚSICA
 =========================================================== */
 
-const musica =
-    document.getElementById("musica");
+const musica = document.getElementById("musica");
 
+const musicButton = document.getElementById("musicButton");
 
-const musicButton =
-    document.getElementById("musicButton");
+const inicioMusica = document.getElementById("inicioMusica");
 
+const botonMusicaInicio =
+    document.getElementById("botonMusicaInicio");
 
-const musicIntro =
-    document.getElementById("musicIntro");
+const botonEntrar =
+    document.getElementById("botonEntrar");
+
+const mensajeMusica =
+    document.getElementById("mensajeMusica");
 
 
 let reproduciendo = false;
 
 
+/* ==========================================================
+   🎵 INICIAR MÚSICA
+=========================================================== */
+
+function iniciarMusica() {
+
+    musica.play()
+        .then(() => {
+
+            reproduciendo = true;
+
+            botonMusicaInicio.innerHTML = "⏸️";
+
+            musicButton.innerHTML = "⏸️";
+
+            mensajeMusica.innerHTML =
+                "La música ya está sonando... ahora sí. 🤍";
+
+            botonEntrar.classList.add("mostrar");
+
+        })
+        .catch((error) => {
+
+            console.log("Error al reproducir:", error);
+
+            mensajeMusica.innerHTML =
+                "Toca nuevamente el botón 🎵 para comenzar.";
+
+        });
+
+}
+
+
+/* ==========================================================
+   🌿 ENTRAR AL ÁLBUM
+   ESTA ES LA PARTE QUE FALTABA
+=========================================================== */
+
+function entrarAlAlbum(event) {
+
+    event.preventDefault();
+
+    /*
+       Primero ocultamos completamente
+       la pantalla inicial.
+    */
+
+    inicioMusica.classList.add("oculto");
+
+
+    /*
+       Esperamos un poquito para que se vea
+       la animación de desaparición.
+    */
+
+    setTimeout(() => {
+
+        /*
+           Después mostramos la portada.
+           El scroll vuelve al inicio.
+        */
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 500);
+
+}
+
+
+/* ==========================================================
+   🎵 BOTÓN DE MÚSICA DURANTE EL ÁLBUM
+=========================================================== */
 
 function toggleMusic() {
 
-
-    if (!reproduciendo) {
-
+    if (musica.paused) {
 
         musica.play()
-
             .then(() => {
-
-
-                musicButton.innerHTML =
-                    "⏸️";
-
 
                 reproduciendo = true;
 
+                musicButton.innerHTML = "⏸️";
 
-                /* Quitar animación */
-
-                musicButton.classList.remove(
-                    "music-pendiente"
-                );
-
-
-                /* Marcar como reproduciendo */
-
-                musicButton.classList.add(
-                    "reproduciendo"
-                );
-
-
-                /* Cerrar bienvenida */
-
-                musicIntro.classList.add(
-                    "ocultar"
-                );
-
+                botonMusicaInicio.innerHTML = "⏸️";
 
             })
-
-
-            .catch((error) => {
-
+            .catch(() => {
 
                 console.log(
-                    "No se pudo reproducir la música:",
-                    error
+                    "No se pudo reproducir la música."
                 );
-
 
             });
 
-
-    }
-
-
-    else {
-
+    } else {
 
         musica.pause();
 
-
-        musicButton.innerHTML =
-            "🎵";
-
-
         reproduciendo = false;
 
+        musicButton.innerHTML = "🎵";
 
-        musicButton.classList.remove(
-            "reproduciendo"
-        );
-
+        botonMusicaInicio.innerHTML = "🎵";
 
     }
 
 }
-
 
 
 /* ==========================================================
@@ -2504,9 +1865,7 @@ function toggleMusic() {
 =========================================================== */
 
 const elementos =
-    document.querySelectorAll(
-        ".aparecer"
-    );
+    document.querySelectorAll(".aparecer");
 
 
 const observer =
@@ -2514,26 +1873,17 @@ const observer =
 
         (entradas) => {
 
+            entradas.forEach((entrada) => {
 
-            entradas.forEach(
-                (entrada) => {
+                if (entrada.isIntersecting) {
 
-
-                    if (
-                        entrada.isIntersecting
-                    ) {
-
-
-                        entrada.target.classList.add(
-                            "visible"
-                        );
-
-
-                    }
+                    entrada.target.classList.add(
+                        "visible"
+                    );
 
                 }
-            );
 
+            });
 
         },
 
@@ -2544,18 +1894,15 @@ const observer =
     );
 
 
-elementos.forEach(
-    (elemento) => {
+elementos.forEach((elemento) => {
 
-        observer.observe(elemento);
+    observer.observe(elemento);
 
-    }
-);
+});
 
 
 </script>
 
 
 </body>
-
 </html>
